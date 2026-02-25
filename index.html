@@ -272,6 +272,45 @@ img { max-width: 100%; height: auto; display: block; }
 .dx-text { font-size: 0.875rem; line-height: 1.8; color: var(--muted); }
 
 /* ===== Cases ===== */
+/* Featured Case */
+.featured-case {
+  margin-bottom: 3rem; overflow: hidden;
+  border-radius: 0.75rem; border: 1px solid var(--border);
+  background: var(--bg-white); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.featured-case-inner { display: flex; flex-direction: column; }
+@media (min-width: 768px) { .featured-case-inner { flex-direction: row; } }
+.featured-case-content { flex: 1; padding: 2rem; }
+@media (min-width: 768px) { .featured-case-content { padding: 3rem; } }
+.featured-case-visual {
+  display: none; align-items: center; justify-content: center;
+  background: rgba(37,99,235,0.04); padding: 3rem; width: 20rem;
+}
+@media (min-width: 768px) { .featured-case-visual { display: flex; } }
+.featured-visual-icon {
+  width: 5rem; height: 5rem; border-radius: 0.75rem;
+  background: var(--primary-light); display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 1rem; font-size: 2.5rem; color: var(--primary);
+}
+.featured-visual-label { font-size: 0.875rem; font-weight: 500; color: var(--primary); text-align: center; }
+.featured-company { font-size: 0.875rem; color: var(--muted); margin-bottom: 0.5rem; }
+.featured-title { font-size: 1.25rem; font-weight: 700; line-height: 1.6; margin-bottom: 2rem; }
+@media (min-width: 768px) { .featured-title { font-size: 1.5rem; } }
+.featured-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+.featured-row:last-child { margin-bottom: 0; }
+.featured-icon-col { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; flex-shrink: 0; }
+.featured-icon-circle {
+  width: 2.5rem; height: 2.5rem; border-radius: 0.5rem;
+  display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+}
+.featured-icon-circle.challenge { background: #fef2f2; }
+.featured-icon-circle.effect { background: #ecfdf5; }
+.featured-icon-label { font-size: 0.75rem; font-weight: 600; }
+.featured-icon-label.challenge { color: #ef4444; }
+.featured-icon-label.effect { color: #059669; }
+.featured-text { font-size: 0.875rem; line-height: 1.8; color: var(--muted); }
+
+/* Case Cards Grid */
 .cases-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
 @media (min-width: 768px) { .cases-grid { grid-template-columns: 1fr 1fr 1fr; } }
 .case-card {
@@ -570,7 +609,7 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="services-divider">
       <div class="services-divider-line"></div>
       <h3 class="services-divider-title">
-        <span class="services-divider-icon">&#x1F4D6;</span>
+        <span class="services-divider-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
         システムインテグレーション事業
       </h3>
       <div class="services-divider-line"></div>
@@ -578,7 +617,7 @@ img { max-width: 100%; height: auto; display: block; }
 
     <div class="si-grid">
       <div class="si-card">
-        <div class="si-icon">&#x2699;</div>
+        <div class="si-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
         <h4 class="si-title">プロジェクト管理支援</h4>
         <ul class="si-list">
           <li class="si-list-item"><span class="si-dot"></span>全体進行、スケジュール管理(WBS)、課題管理</li>
@@ -588,7 +627,7 @@ img { max-width: 100%; height: auto; display: block; }
         </ul>
       </div>
       <div class="si-card">
-        <div class="si-icon">&#x2753;</div>
+        <div class="si-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
         <h4 class="si-title">MS技術エキスパート支援</h4>
         <ul class="si-list">
           <li class="si-list-item"><span class="si-dot"></span>マイクロソフト技術に関する課題のQ&amp;Aサービス</li>
@@ -603,7 +642,7 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="services-divider">
       <div class="services-divider-line"></div>
       <h3 class="services-divider-title">
-        <span class="services-divider-icon">&#x1F4D6;</span>
+        <span class="services-divider-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
         内製DXプロジェクト支援事業
       </h3>
       <div class="services-divider-line"></div>
@@ -616,17 +655,17 @@ img { max-width: 100%; height: auto; display: block; }
 
     <div class="dx-grid">
       <div class="dx-card">
-        <div class="dx-icon">&#x1F4BB;</div>
+        <div class="dx-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h4 class="dx-title">M365利活用支援</h4>
         <p class="dx-text">Microsoft 365の利活用方法をご提案。活用のためのマニュアル作成、勉強会の実施など。</p>
       </div>
       <div class="dx-card">
-        <div class="dx-icon">&#x1F393;</div>
+        <div class="dx-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg></div>
         <h4 class="dx-title">Power Platform 研修</h4>
         <p class="dx-text">Power Apps / Power Automateのハンズオン型半日研修を提供。社内DX人材を育成。</p>
       </div>
       <div class="dx-card">
-        <div class="dx-icon">&#x1F91D;</div>
+        <div class="dx-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2z"/><path d="M19 17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2z"/><path d="m9 12-1.5-3L2 6l5-3 3.5 3"/><path d="m15 12 1.5-3L22 6l-5-3-3.5 3"/></svg></div>
         <h4 class="dx-title">伴走型DXプロジェクト支援</h4>
         <p class="dx-text">Power Platformによるシステム開発を伴走型で支援。ビジネス課題、技術課題の解決をサポート。</p>
       </div>
@@ -642,6 +681,45 @@ img { max-width: 100%; height: auto; display: block; }
       <h2 class="section-title">活用事例</h2>
     </div>
 
+    <!-- Featured Case (固定・CMS連携なし) -->
+    <div class="featured-case">
+      <div class="featured-case-inner">
+        <div class="featured-case-content">
+          <span class="case-badge" style="margin-bottom:0.75rem;display:inline-block;">製造業</span>
+          <p class="featured-company">大手製造業（従業員3万人規模）</p>
+          <h3 class="featured-title">全社DX人材育成プログラムの設計・実行支援</h3>
+
+          <div class="featured-row">
+            <div class="featured-icon-col">
+              <div class="featured-icon-circle challenge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <span class="featured-icon-label challenge">課題</span>
+            </div>
+            <p class="featured-text">社内に市民開発者を育成したいが、現場社員のITスキルレベルにばらつきがあり、画一的な研修では成果が出なかった。外部ベンダーへの依存度が高く、簡易なアプリ開発にも時間とコストがかかっていた。</p>
+          </div>
+
+          <div class="featured-row">
+            <div class="featured-icon-col">
+              <div class="featured-icon-circle effect">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <span class="featured-icon-label effect">効果</span>
+            </div>
+            <p class="featured-text">レベル別Power Platform研修を毎月実施し、6ヶ月で50名超の市民開発者を育成。現場主導のアプリ開発が定着し、外部委託コストの削減と業務改善スピードの大幅な向上を実現した。</p>
+          </div>
+        </div>
+
+        <div class="featured-case-visual">
+          <div>
+            <div class="featured-visual-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg></div>
+            <p class="featured-visual-label">Featured Case</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CMS連携カード (microCMSから動的取得) -->
     <div class="cases-grid" id="cases-grid">
       <!-- microCMSからデータを読み込み中 -->
       <div class="case-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
@@ -839,20 +917,20 @@ function closeMobile() {
   var MICROCMS_API_KEY = 'LPwzSjb9rQy2x4WmzS3LlSZpkiL0wuEku1Dt';
   var ENDPOINT = 'https://' + MICROCMS_DOMAIN + '.microcms.io/api/v1/cases';
 
-  // 業界名に対応するアイコンのマッピング
+  // 業界名に対応するSVGアイコンのマッピング
   var industryIcons = {
-    '製造業': '&#x1F3ED;',
-    '金融業': '&#x1F3E6;',
-    '建設業': '&#x1F3D7;',
-    'IT': '&#x1F4BB;',
-    '小売業': '&#x1F6D2;',
-    '医療': '&#x1F3E5;',
-    '教育': '&#x1F393;',
-    'サービス業': '&#x1F91D;'
+    '製造業': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>',
+    '金融業': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 8 4 8"/></svg>',
+    '建設業': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="16" rx="2"/><path d="M1 10h22"/><path d="M6 6V2"/><path d="M18 6V2"/></svg>',
+    'IT': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    '小売業': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
+    '医療': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    '教育': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>',
+    'サービス業': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
   };
 
   function getIcon(industry) {
-    return industryIcons[industry] || '&#x1F4BC;';
+    return industryIcons[industry] || '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>';
   }
 
   function renderCases(cases) {

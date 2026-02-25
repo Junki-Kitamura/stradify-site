@@ -212,6 +212,11 @@ img { max-width: 100%; height: auto; display: block; }
   border: 1px solid var(--border); background: var(--bg-white);
   border-radius: var(--radius); padding: 2rem;
 }
+.challenge-icon {
+  width: 3rem; height: 3rem; border-radius: var(--radius);
+  background: var(--primary-light); display: flex; align-items: center;
+  justify-content: center; color: var(--primary); margin-bottom: 1rem;
+}
 .challenge-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
 .challenge-desc { font-size: 0.875rem; line-height: 1.8; color: var(--muted); }
 .challenges-cta {
@@ -578,10 +583,12 @@ img { max-width: 100%; height: auto; display: block; }
 
     <div class="challenges-grid">
       <div class="challenge-card">
+        <div class="challenge-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
         <h3 class="challenge-title">戦略的アプローチの欠如</h3>
         <p class="challenge-desc">多くの企業が取り組み方がわからないという現実があり、全社戦略に基づく体系的なDXアプローチの欠如が、効果的なデジタル変革を妨げています。</p>
       </div>
       <div class="challenge-card">
+        <div class="challenge-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3 class="challenge-title">DX人材の不足</h3>
         <p class="challenge-desc">DX推進において、ビジネスと技術の両面でリーダーシップを発揮できる人材の確保が重要です。しかし、日本企業ではこうした人材の不足が顕著です。DX推進に必要な人材を確保・育成するためのリソースが限られており、深刻化しています。</p>
       </div>

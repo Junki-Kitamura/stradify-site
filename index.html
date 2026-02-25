@@ -642,46 +642,10 @@ img { max-width: 100%; height: auto; display: block; }
       <h2 class="section-title">活用事例</h2>
     </div>
 
-    <div class="cases-grid">
-      <!-- Case 1 -->
-      <div class="case-card">
-        <div class="case-header">
-          <div class="case-icon">&#x1F3ED;</div>
-          <span class="case-badge">製造業</span>
-        </div>
-        <h3 class="case-title">企業内DX人材育成のためのPower Platform研修</h3>
-        <p class="case-overview">3万人企業の市民開発者育成のために、20-40名の社員に対して、毎月2-3時間のPower Platform研修を実施</p>
-        <div class="case-details">
-          <div class="case-detail"><span class="case-dot"></span>初級編：はじめてローコードでアプリを作る社員向け</div>
-          <div class="case-detail"><span class="case-dot"></span>中級編：Power Apps開発を始めてカスタマイズをしたい社員向け</div>
-        </div>
-      </div>
-      <!-- Case 2 -->
-      <div class="case-card">
-        <div class="case-header">
-          <div class="case-icon">&#x1F3ED;</div>
-          <span class="case-badge">製造業</span>
-        </div>
-        <h3 class="case-title">技術開発部向けアプリ開発支援</h3>
-        <p class="case-overview">要件仕様に向けた技術的実現性の確認を伴走型で支援</p>
-        <div class="case-details">
-          <div class="case-detail"><span class="case-dot"></span>フロアマップ管理機能</div>
-          <div class="case-detail"><span class="case-dot"></span>Bluetooth計測器からデータ取得とピンへの表示</div>
-          <div class="case-detail"><span class="case-dot"></span>計測結果のグラフ表示</div>
-        </div>
-      </div>
-      <!-- Case 3 -->
-      <div class="case-card">
-        <div class="case-header">
-          <div class="case-icon">&#x1F3E6;</div>
-          <span class="case-badge">金融業</span>
-        </div>
-        <h3 class="case-title">プロジェクト内課題管理アプリ</h3>
-        <p class="case-overview">プロジェクト内での複数ステークホルダーに対する確認依頼事項のオーナーシップと進捗の管理をアプリで可視化</p>
-        <div class="case-details">
-          <div class="case-detail"><span class="case-dot"></span>SharePointリストとPower Appsで実現</div>
-          <div class="case-detail"><span class="case-dot"></span>定例会議での確認をアプリで実現し確認漏れの削減を実現</div>
-        </div>
+    <div class="cases-grid" id="cases-grid">
+      <!-- microCMSからデータを読み込み中 -->
+      <div class="case-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+        <p style="color: var(--muted);">事例データを読み込んでいます...</p>
       </div>
     </div>
 
@@ -868,6 +832,125 @@ function closeMobile() {
   menuIcon.style.display = '';
   closeIcon.style.display = 'none';
 }
+
+// ===== microCMS 事例データ取得 =====
+(function() {
+  var MICROCMS_DOMAIN = 'stradify-cases';
+  var MICROCMS_API_KEY = 'LPwzSjb9rQy2x4WmzS3LlSZpkiL0wuEku1Dt';
+  var ENDPOINT = 'https://' + MICROCMS_DOMAIN + '.microcms.io/api/v1/cases';
+
+  // 業界名に対応するアイコンのマッピング
+  var industryIcons = {
+    '製造業': '&#x1F3ED;',
+    '金融業': '&#x1F3E6;',
+    '建設業': '&#x1F3D7;',
+    'IT': '&#x1F4BB;',
+    '小売業': '&#x1F6D2;',
+    '医療': '&#x1F3E5;',
+    '教育': '&#x1F393;',
+    'サービス業': '&#x1F91D;'
+  };
+
+  function getIcon(industry) {
+    return industryIcons[industry] || '&#x1F4BC;';
+  }
+
+  function renderCases(cases) {
+    var grid = document.getElementById('cases-grid');
+    if (!cases || cases.length === 0) {
+      grid.innerHTML = '<div class="case-card" style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="color:var(--muted);">現在、事例データはありません。</p></div>';
+      return;
+    }
+
+    var html = '';
+    cases.forEach(function(item) {
+      var icon = getIcon(item.industry);
+      var detailsHtml = '';
+
+      // detailsフィールドが配列の場合
+      if (Array.isArray(item.details)) {
+        item.details.forEach(function(d) {
+          detailsHtml += '<div class="case-detail"><span class="case-dot"></span>' + escapeHtml(d) + '</div>';
+        });
+      }
+      // detailsがリッチエディタ（HTML文字列）の場合
+      else if (typeof item.details === 'string' && item.details.trim()) {
+        // HTMLタグを除去してリスト項目に分割
+        var text = item.details.replace(/<[^>]*>/g, '\n');
+        var lines = text.split('\n').filter(function(l) { return l.trim(); });
+        lines.forEach(function(line) {
+          detailsHtml += '<div class="case-detail"><span class="case-dot"></span>' + escapeHtml(line.trim()) + '</div>';
+        });
+      }
+
+      html += '<div class="case-card">'
+        + '<div class="case-header">'
+        + '<div class="case-icon">' + icon + '</div>'
+        + '<span class="case-badge">' + escapeHtml(item.industry || '') + '</span>'
+        + '</div>'
+        + '<h3 class="case-title">' + escapeHtml(item.title || '') + '</h3>'
+        + '<p class="case-overview">' + escapeHtml(item.overview || '') + '</p>';
+
+      if (detailsHtml) {
+        html += '<div class="case-details">' + detailsHtml + '</div>';
+      }
+
+      html += '</div>';
+    });
+
+    grid.innerHTML = html;
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  // フォールバック用の静的データ（API取得失敗時に表示）
+  var fallbackCases = [
+    {
+      title: '企業内DX人材育成のためのPower Platform研修',
+      industry: '製造業',
+      overview: '3万人企業の市民開発者育成のために、20-40名の社員に対して、毎月2-3時間のPower Platform研修を実施',
+      details: ['初級編：はじめてローコードでアプリを作る社員向け', '中級編：Power Apps開発を始めてカスタマイズをしたい社員向け']
+    },
+    {
+      title: '技術開発部向けアプリ開発支援',
+      industry: '製造業',
+      overview: '要件仕様に向けた技術的実現性の確認を伴走型で支援',
+      details: ['フロアマップ管理機能', 'Bluetooth計測器からデータ取得とピンへの表示', '計測結果のグラフ表示']
+    },
+    {
+      title: 'プロジェクト内課題管理アプリ',
+      industry: '金融業',
+      overview: 'プロジェクト内での複数ステークホルダーに対する確認依頼事項のオーナーシップと進捗の管理をアプリで可視化',
+      details: ['SharePointリストとPower Appsで実現', '定例会議での確認をアプリで実現し確認漏れの削減を実現']
+    }
+  ];
+
+  // APIからデータ取得
+  fetch(ENDPOINT + '?limit=10', {
+    headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('API Error: ' + res.status);
+    return res.json();
+  })
+  .then(function(data) {
+    if (data.contents && data.contents.length > 0) {
+      renderCases(data.contents);
+    } else {
+      // APIは成功したがデータが空の場合、フォールバック表示
+      renderCases(fallbackCases);
+    }
+  })
+  .catch(function(err) {
+    console.warn('microCMS API取得エラー:', err);
+    // フォールバック：静的データを表示
+    renderCases(fallbackCases);
+  });
+})();
 </script>
 
 </body>

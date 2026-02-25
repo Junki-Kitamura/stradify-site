@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2a7fff">
+<title>STRADIFY - テクノロジーで社会課題を解決する道を造る</title>
+<meta name="description" content="株式会社STRADIFYは、Microsoft 365やPower Platformを活用したDX推進・システムインテグレーションで企業のデジタル変革を支援します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #1e293b;
+  background: #fdfdfd;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; cursor: pointer; font: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ===== Design Tokens ===== */
+:root {
+  --primary: #2563eb;
+  --primary-light: rgba(37,99,235,0.1);
+  --accent: #2d9d78;
+  --accent-light: rgba(45,157,120,0.1);
+  --foreground: #1e293b;
+  --muted: #4a5568;
+  --border: #e2e8f0;
+  --bg-gray: #f5f7fa;
+  --bg-white: #ffffff;
+  --contact-bg: #2d5f4f;
+  --radius: 0.5rem;
+  --max-w: 72rem;
+}
+
+/* ===== Utilities ===== */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+.text-center { text-align: center; }
+.text-balance { text-wrap: balance; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* ===== Header ===== */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: var(--bg-white); border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.header-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+.header-logo { height: 3rem; width: auto; object-fit: contain; }
+.header-nav { display: flex; align-items: center; gap: 2rem; }
+.header-nav-link {
+  font-size: 0.875rem; font-weight: 500; color: #000;
+  transition: opacity 0.2s;
+}
+.header-nav-link:hover { opacity: 0.7; }
+.header-cta {
+  background: var(--contact-bg); color: #fff;
+  padding: 0.625rem 1.25rem; border-radius: var(--radius);
+  font-size: 0.875rem; font-weight: 500;
+  transition: opacity 0.2s;
+}
+.header-cta:hover { opacity: 0.9; }
+.mobile-toggle { display: none; color: #000; }
+.mobile-nav { display: none; }
+
+@media (max-width: 768px) {
+  .header-nav { display: none; }
+  .mobile-toggle { display: block; }
+  .mobile-nav.open {
+    display: flex; flex-direction: column; gap: 1rem;
+    padding: 1rem 1.5rem 1.5rem; border-top: 1px solid var(--border);
+    background: var(--bg-white);
+  }
+  .mobile-nav .header-nav-link { font-size: 1rem; text-align: left; }
+  .mobile-nav .header-cta { text-align: center; margin-top: 0.5rem; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; min-height: 90vh; display: flex; align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/hero-city-aerial.jpg') center/cover no-repeat;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(30,41,59,0.85), rgba(51,65,85,0.80), rgba(71,85,105,0.75));
+}
+.hero-content {
+  position: relative; z-index: 1; text-align: center;
+  max-width: var(--max-w); margin: 0 auto; padding: 8rem 1.5rem;
+  width: 100%;
+}
+.hero-tagline {
+  font-size: 0.875rem; font-weight: 500; text-transform: uppercase;
+  letter-spacing: 0.3em; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-size: 2rem; font-weight: 600; color: #fff;
+  line-height: 1.6; max-width: 48rem; margin: 0 auto 2.5rem;
+}
+@media (min-width: 768px) { .hero-title { font-size: 3rem; } }
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #fff; color: var(--foreground);
+  padding: 0.75rem 2rem; border-radius: var(--radius);
+  font-size: 0.875rem; font-weight: 500;
+  transition: opacity 0.2s;
+}
+.hero-btn-primary:hover { opacity: 0.9; }
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 2px solid #fff; color: #fff;
+  padding: 0.75rem 2rem; border-radius: var(--radius);
+  font-size: 0.875rem; font-weight: 500;
+  transition: background 0.2s;
+}
+.hero-btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+/* ===== Section Common ===== */
+.section { padding: 6rem 0; }
+@media (min-width: 768px) { .section { padding: 8rem 0; } }
+.section-label {
+  font-size: 0.875rem; font-weight: 500; text-transform: uppercase;
+  letter-spacing: 0.2em; color: var(--primary); margin-bottom: 0.75rem;
+}
+.section-title {
+  font-size: 1.5rem; font-weight: 600; color: var(--foreground);
+}
+@media (min-width: 768px) { .section-title { font-size: 1.875rem; } }
+.bg-white { background: var(--bg-white); }
+.bg-gray { background: var(--bg-gray); }
+
+/* ===== Vision ===== */
+.vision-box {
+  max-width: 56rem; margin: 0 auto;
+  border: 1px solid rgba(37,99,235,0.2);
+  background: linear-gradient(135deg, rgba(37,99,235,0.03), rgba(45,157,120,0.03));
+  border-radius: var(--radius); padding: 2rem;
+  margin-bottom: 3rem;
+}
+.vision-box-title {
+  font-size: 1.25rem; font-weight: 600; text-align: center;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) { .vision-box-title { font-size: 1.5rem; } }
+.vision-desc {
+  text-align: center; font-size: 0.875rem; line-height: 1.8;
+  color: var(--muted); margin-bottom: 2rem;
+}
+@media (min-width: 768px) { .vision-desc { font-size: 1rem; } }
+.vision-desc .highlight { font-weight: 600; color: var(--primary); }
+.steps-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 768px) { .steps-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.step-card {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 1.5rem; background: var(--bg-white); border-radius: var(--radius);
+  text-align: center; position: relative;
+}
+.step-number {
+  width: 3rem; height: 3rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;
+}
+.step-number.blue { background: var(--primary-light); color: var(--primary); }
+.step-number.green { background: var(--accent-light); color: var(--accent); }
+.step-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.step-desc { font-size: 0.75rem; color: var(--muted); }
+.step-arrow {
+  display: none; position: absolute; right: -0.75rem; top: 50%;
+  transform: translateY(-50%); color: var(--primary); font-size: 1.25rem;
+}
+@media (min-width: 768px) { .step-arrow { display: block; } }
+
+.kodawari-box {
+  max-width: 56rem; margin: 0 auto;
+  border: 1px solid var(--border); background: var(--bg-white);
+  border-radius: var(--radius); padding: 2rem;
+}
+.kodawari-label {
+  display: inline-block; background: var(--accent-light);
+  color: var(--accent); font-size: 0.875rem; font-weight: 600;
+  padding: 0.375rem 1rem; border-radius: 9999px;
+  letter-spacing: 0.05em;
+}
+.kodawari-title {
+  font-size: 1.25rem; font-weight: 600; text-align: center; margin: 1rem 0 1.5rem;
+}
+.kodawari-text {
+  text-align: center; font-size: 1rem; line-height: 1.8; color: var(--muted);
+}
+
+/* ===== Challenges ===== */
+.challenges-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
+@media (min-width: 768px) { .challenges-grid { grid-template-columns: 1fr 1fr; } }
+.challenge-card {
+  border: 1px solid var(--border); background: var(--bg-white);
+  border-radius: var(--radius); padding: 2rem;
+}
+.challenge-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+.challenge-desc { font-size: 0.875rem; line-height: 1.8; color: var(--muted); }
+.challenges-cta {
+  border: 1px solid rgba(37,99,235,0.2); background: rgba(37,99,235,0.03);
+  border-radius: var(--radius); padding: 2rem; text-align: center;
+  font-size: 1rem; font-weight: 500; line-height: 1.8;
+}
+.challenges-cta .highlight { color: var(--primary); }
+
+/* ===== Services ===== */
+.services-divider {
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;
+}
+.services-divider-line { flex: 1; height: 1px; background: var(--border); }
+.services-divider-title { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+.services-divider-icon { color: var(--primary); }
+.si-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 5rem; }
+@media (min-width: 768px) { .si-grid { grid-template-columns: 1fr 1fr; } }
+.si-card {
+  border: 1px solid var(--border); background: var(--bg-white);
+  border-radius: var(--radius); padding: 2rem;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.si-card:hover { border-color: rgba(37,99,235,0.3); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.si-icon {
+  width: 5rem; height: 5rem; border-radius: var(--radius);
+  background: var(--primary-light); display: flex; align-items: center;
+  justify-content: center; margin-bottom: 1.5rem; color: var(--primary); font-size: 2rem;
+}
+.si-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; }
+.si-list { display: flex; flex-direction: column; gap: 0.625rem; }
+.si-list-item {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  font-size: 0.875rem; color: var(--muted); line-height: 1.8;
+}
+.si-dot {
+  width: 0.375rem; height: 0.375rem; border-radius: 50%;
+  background: rgba(37,99,235,0.6); flex-shrink: 0; margin-top: 0.625rem;
+}
+.dx-desc {
+  max-width: 48rem; margin: 0 auto 2.5rem; text-align: center;
+  font-size: 1rem; line-height: 1.8; color: var(--muted);
+}
+.dx-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 768px) { .dx-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.dx-card {
+  border: 1px solid var(--border); background: var(--bg-white);
+  border-radius: var(--radius); padding: 1.5rem;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.dx-card:hover { border-color: rgba(37,99,235,0.3); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.dx-icon {
+  width: 4rem; height: 4rem; border-radius: var(--radius);
+  background: var(--accent-light); display: flex; align-items: center;
+  justify-content: center; margin-bottom: 1.25rem; color: var(--accent); font-size: 1.75rem;
+}
+.dx-title { font-weight: 600; margin-bottom: 0.75rem; }
+.dx-text { font-size: 0.875rem; line-height: 1.8; color: var(--muted); }
+
+/* ===== Cases ===== */
+.cases-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 768px) { .cases-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.case-card {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border); background: var(--bg-white);
+  border-radius: var(--radius); padding: 2rem;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.case-card:hover { border-color: rgba(37,99,235,0.3); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.case-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+.case-icon {
+  width: 3.5rem; height: 3.5rem; border-radius: var(--radius);
+  background: var(--primary-light); display: flex; align-items: center;
+  justify-content: center; color: var(--primary); font-size: 1.5rem;
+}
+.case-badge {
+  background: var(--primary-light); color: var(--primary);
+  padding: 0.25rem 0.75rem; border-radius: 9999px;
+  font-size: 0.75rem; font-weight: 500;
+}
+.case-title { font-size: 1rem; font-weight: 600; line-height: 1.6; margin-bottom: 0.75rem; }
+.case-overview { font-size: 0.875rem; line-height: 1.8; color: var(--muted); margin-bottom: 1rem; }
+.case-details { margin-top: auto; border-top: 1px solid var(--border); padding-top: 1rem; }
+.case-detail {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  font-size: 0.75rem; color: var(--muted); line-height: 1.8;
+}
+.case-detail + .case-detail { margin-top: 0.5rem; }
+.case-dot {
+  width: 0.25rem; height: 0.25rem; border-radius: 50%;
+  background: rgba(37,99,235,0.6); flex-shrink: 0; margin-top: 0.5rem;
+}
+.cases-link {
+  display: flex; justify-content: flex-end; margin-top: 2.5rem;
+}
+.cases-link a {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.875rem; font-weight: 500; color: var(--primary);
+  transition: opacity 0.2s;
+}
+.cases-link a:hover { opacity: 0.8; }
+
+/* ===== CEO ===== */
+.ceo-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start; }
+@media (min-width: 768px) { .ceo-grid { grid-template-columns: 2fr 3fr; } }
+.ceo-photo {
+  position: relative; aspect-ratio: 3/4; overflow: hidden;
+  border-radius: var(--radius);
+}
+.ceo-photo img { width: 100%; height: 100%; object-fit: cover; }
+.ceo-name-area { text-align: center; margin-top: 1rem; }
+.ceo-title-label { font-size: 1rem; color: var(--muted); }
+.ceo-name { font-size: 1.5rem; font-weight: 600; margin-top: 0.25rem; }
+.ceo-name-en { font-size: 1rem; color: var(--muted); }
+.ceo-blockquote {
+  border-left: 2px solid var(--primary); padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+.ceo-quote { font-size: 1.125rem; font-weight: 500; line-height: 1.8; }
+.ceo-message { font-size: 1rem; line-height: 1.8; color: var(--muted); margin-top: 1rem; }
+.ceo-edu-logo { display: flex; gap: 2rem; margin-bottom: 2rem; }
+.ceo-edu-content { flex: 1; }
+.ceo-logo-area { flex-shrink: 0; padding-top: 0.25rem; padding-right: 1rem; }
+.ceo-logo-area img { height: 6rem; width: auto; object-fit: contain; }
+.ceo-heading {
+  font-size: 1rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--primary); margin-bottom: 1rem;
+}
+.ceo-edu-list { display: flex; flex-direction: column; gap: 0.5rem; font-size: 1rem; color: var(--muted); }
+.career-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.career-item { display: flex; align-items: flex-start; gap: 0.75rem; }
+.career-badge {
+  display: inline-flex; width: 6rem; flex-shrink: 0;
+  align-items: center; justify-content: center;
+  background: var(--primary-light); color: var(--primary);
+  padding: 0.25rem 0.5rem; border-radius: 0.25rem;
+  font-size: 0.875rem; font-weight: 500; margin-top: 0.125rem;
+}
+.career-text { font-size: 1rem; line-height: 1.8; color: var(--muted); }
+
+/* ===== Company ===== */
+.company-table {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; background: var(--bg-white);
+}
+.company-row {
+  display: flex; flex-direction: column; gap: 0.25rem;
+  padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+}
+@media (min-width: 640px) { .company-row { flex-direction: row; gap: 2rem; } }
+.company-row:last-child { border-bottom: none; }
+.company-label {
+  flex-shrink: 0; width: 8rem; font-size: 0.875rem; font-weight: 500;
+}
+.company-value { font-size: 0.875rem; color: var(--muted); }
+.company-value a { color: var(--primary); }
+.company-value a:hover { text-decoration: underline; }
+
+/* ===== Contact CTA ===== */
+.contact-section {
+  background: var(--contact-bg); padding: 6rem 0; text-align: center;
+}
+@media (min-width: 768px) { .contact-section { padding: 8rem 0; } }
+.contact-title { font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+@media (min-width: 768px) { .contact-title { font-size: 1.875rem; } }
+.contact-desc {
+  max-width: 36rem; margin: 0 auto 2.5rem; font-size: 1rem;
+  line-height: 1.8; color: rgba(255,255,255,0.8);
+}
+.contact-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #fff; color: var(--foreground);
+  padding: 1rem 2.5rem; border-radius: var(--radius);
+  font-size: 1rem; font-weight: 500;
+  transition: opacity 0.2s;
+}
+.contact-btn:hover { opacity: 0.9; }
+
+/* ===== Footer ===== */
+.footer {
+  border-top: 1px solid var(--border); background: var(--bg-white);
+  padding: 3rem 0;
+}
+.footer-inner {
+  display: flex; flex-direction: column; gap: 3rem;
+  align-items: flex-start;
+}
+@media (min-width: 768px) {
+  .footer-inner { flex-direction: row; justify-content: space-between; }
+}
+.footer-logo { height: 6rem; width: auto; object-fit: contain; }
+.footer-right {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .footer-right { flex-direction: row; justify-content: flex-end; gap: 4rem; }
+}
+.sitemap-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 2rem;
+}
+.sitemap-title {
+  grid-column: span 2; font-size: 0.875rem; font-weight: 600;
+}
+.sitemap-link {
+  font-size: 0.875rem; color: var(--muted); transition: color 0.2s;
+  text-align: left;
+}
+.sitemap-link:hover { color: var(--foreground); }
+.footer-company-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.footer-address { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+.footer-bottom {
+  margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+  text-align: center; font-size: 0.75rem; color: var(--muted);
+}
+
+/* ===== SVG Icons (inline) ===== */
+.icon-svg { display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" aria-label="STRADIFY Home">
+      <img src="images/stradify-logo-vertical.png" alt="STRADIFY" class="header-logo">
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <a href="#vision" class="header-nav-link">ビジョン</a>
+      <a href="#services" class="header-nav-link">サービス</a>
+      <a href="#cases" class="header-nav-link">事例</a>
+      <a href="#ceo" class="header-nav-link">代表メッセージ</a>
+      <a href="#company" class="header-nav-link">会社概要</a>
+      <a href="https://forms.office.com/r/tyZYpVU7Bv" target="_blank" rel="noopener noreferrer" class="header-cta">お問い合わせ</a>
+    </nav>
+    <button class="mobile-toggle" onclick="toggleMobile()" aria-label="メニュー">
+      <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+    <a href="#vision" class="header-nav-link" onclick="closeMobile()">ビジョン</a>
+    <a href="#services" class="header-nav-link" onclick="closeMobile()">サービス</a>
+    <a href="#cases" class="header-nav-link" onclick="closeMobile()">事例</a>
+    <a href="#ceo" class="header-nav-link" onclick="closeMobile()">代表メッセージ</a>
+    <a href="#company" class="header-nav-link" onclick="closeMobile()">会社概要</a>
+    <a href="https://forms.office.com/r/tyZYpVU7Bv" target="_blank" rel="noopener noreferrer" class="header-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-tagline">Cross, Connect, Create</p>
+    <h1 class="hero-title">テクノロジーで<br>社会課題を解決する道を造る</h1>
+    <div class="hero-buttons">
+      <a href="#services" class="hero-btn-primary">サービスを見る &rarr;</a>
+      <a href="https://forms.office.com/r/tyZYpVU7Bv" target="_blank" rel="noopener noreferrer" class="hero-btn-secondary">お問い合わせ</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISION ===== -->
+<section id="vision" class="section bg-white">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:4rem;">
+      <p class="section-label">Our Vision for DX</p>
+      <h2 class="section-title">私たちが目指すDX</h2>
+    </div>
+
+    <div class="vision-box">
+      <h3 class="vision-box-title">ワークスタイルから変えていくDX</h3>
+      <p class="vision-desc">
+        紙や従来のプロセスに依存したビジネスからの転換には、<br>
+        <span class="highlight">ツールやシステムの刷新だけでなく、ワークスタイルそのものを変えることが必要です。</span>
+      </p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number blue">1</div>
+          <h4 class="step-title">ワークスタイルを変える</h4>
+          <p class="step-desc">使えるツールを使いこなす</p>
+          <span class="step-arrow">&rarr;</span>
+        </div>
+        <div class="step-card">
+          <div class="step-number green">2</div>
+          <h4 class="step-title">企業文化・風土を変える</h4>
+          <p class="step-desc">組織全体の変革を促進</p>
+          <span class="step-arrow">&rarr;</span>
+        </div>
+        <div class="step-card">
+          <div class="step-number blue">3</div>
+          <h4 class="step-title">DX人材が育つ</h4>
+          <p class="step-desc">持続可能な変革の実現</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="kodawari-box">
+      <div class="text-center" style="margin-bottom:1rem;">
+        <span class="kodawari-label">STRADIFYのこだわり</span>
+      </div>
+      <h4 class="kodawari-title">Microsoft 365を契約金額の範囲内で使いこなす</h4>
+      <p class="kodawari-text">
+        Microsoft 365を『単なるメールとExcel』で終わらせてはいませんか。<br>
+        Microsoft 365は従来型のメール＋ファイルサーバーの文化を変える素晴らしいツールです。<br>
+        ご契約のツールを使って自動化・業務効率化・DXの内製化を実現します。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHALLENGES ===== -->
+<section class="section bg-gray">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:4rem;">
+      <p class="section-label">Challenges</p>
+      <h2 class="section-title">企業が直面するDXの課題</h2>
+    </div>
+
+    <div class="challenges-grid">
+      <div class="challenge-card">
+        <h3 class="challenge-title">戦略的アプローチの欠如</h3>
+        <p class="challenge-desc">多くの企業が取り組み方がわからないという現実があり、全社戦略に基づく体系的なDXアプローチの欠如が、効果的なデジタル変革を妨げています。</p>
+      </div>
+      <div class="challenge-card">
+        <h3 class="challenge-title">DX人材の不足</h3>
+        <p class="challenge-desc">DX推進において、ビジネスと技術の両面でリーダーシップを発揮できる人材の確保が重要です。しかし、日本企業ではこうした人材の不足が顕著です。DX推進に必要な人材を確保・育成するためのリソースが限られており、深刻化しています。</p>
+      </div>
+    </div>
+
+    <div class="challenges-cta">
+      紙や従来のプロセスに依存したビジネスからの転換には、<br>
+      ツールやシステムの刷新だけではなく、<span class="highlight">ワークスタイルそのものを変える</span>ことが必要です。
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="section bg-white">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:4rem;">
+      <p class="section-label">Services</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">事業内容</h2>
+      <p style="max-width:40rem;margin:0 auto;font-size:1rem;line-height:1.8;color:var(--muted);">
+        お客様のIT導入プロジェクトの円滑な運営と成功を、技術と人の両面からご支援します。
+      </p>
+    </div>
+
+    <!-- SI -->
+    <div class="services-divider">
+      <div class="services-divider-line"></div>
+      <h3 class="services-divider-title">
+        <span class="services-divider-icon">&#x1F4D6;</span>
+        システムインテグレーション事業
+      </h3>
+      <div class="services-divider-line"></div>
+    </div>
+
+    <div class="si-grid">
+      <div class="si-card">
+        <div class="si-icon">&#x2699;</div>
+        <h4 class="si-title">プロジェクト管理支援</h4>
+        <ul class="si-list">
+          <li class="si-list-item"><span class="si-dot"></span>全体進行、スケジュール管理(WBS)、課題管理</li>
+          <li class="si-list-item"><span class="si-dot"></span>ステークホルダーとのコミュニケーション</li>
+          <li class="si-list-item"><span class="si-dot"></span>アーキテクチャの方向付け、テクノロジーロードマップ</li>
+          <li class="si-list-item"><span class="si-dot"></span>Fit &amp; Gap分析と必要なPoCのリード</li>
+        </ul>
+      </div>
+      <div class="si-card">
+        <div class="si-icon">&#x2753;</div>
+        <h4 class="si-title">MS技術エキスパート支援</h4>
+        <ul class="si-list">
+          <li class="si-list-item"><span class="si-dot"></span>マイクロソフト技術に関する課題のQ&amp;Aサービス</li>
+          <li class="si-list-item"><span class="si-dot"></span>チケット制で気軽に相談可能</li>
+          <li class="si-list-item"><span class="si-dot"></span>Windows 11移行、Microsoft 365移行支援</li>
+          <li class="si-list-item"><span class="si-dot"></span>クラウド移行の技術比較・コスト比較</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DX -->
+    <div class="services-divider">
+      <div class="services-divider-line"></div>
+      <h3 class="services-divider-title">
+        <span class="services-divider-icon">&#x1F4D6;</span>
+        内製DXプロジェクト支援事業
+      </h3>
+      <div class="services-divider-line"></div>
+    </div>
+
+    <p class="dx-desc">
+      Microsoft 365を『単なるメールとExcel』で終わらせてはいませんか。<br>
+      今ある機能を使いこなすことで、私たちの働き方はもっと変えられます。
+    </p>
+
+    <div class="dx-grid">
+      <div class="dx-card">
+        <div class="dx-icon">&#x1F4BB;</div>
+        <h4 class="dx-title">M365利活用支援</h4>
+        <p class="dx-text">Microsoft 365の利活用方法をご提案。活用のためのマニュアル作成、勉強会の実施など。</p>
+      </div>
+      <div class="dx-card">
+        <div class="dx-icon">&#x1F393;</div>
+        <h4 class="dx-title">Power Platform 研修</h4>
+        <p class="dx-text">Power Apps / Power Automateのハンズオン型半日研修を提供。社内DX人材を育成。</p>
+      </div>
+      <div class="dx-card">
+        <div class="dx-icon">&#x1F91D;</div>
+        <h4 class="dx-title">伴走型DXプロジェクト支援</h4>
+        <p class="dx-text">Power Platformによるシステム開発を伴走型で支援。ビジネス課題、技術課題の解決をサポート。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASES ===== -->
+<section id="cases" class="section bg-gray">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:4rem;">
+      <p class="section-label">Case Studies</p>
+      <h2 class="section-title">活用事例</h2>
+    </div>
+
+    <div class="cases-grid">
+      <!-- Case 1 -->
+      <div class="case-card">
+        <div class="case-header">
+          <div class="case-icon">&#x1F3ED;</div>
+          <span class="case-badge">製造業</span>
+        </div>
+        <h3 class="case-title">企業内DX人材育成のためのPower Platform研修</h3>
+        <p class="case-overview">3万人企業の市民開発者育成のために、20-40名の社員に対して、毎月2-3時間のPower Platform研修を実施</p>
+        <div class="case-details">
+          <div class="case-detail"><span class="case-dot"></span>初級編：はじめてローコードでアプリを作る社員向け</div>
+          <div class="case-detail"><span class="case-dot"></span>中級編：Power Apps開発を始めてカスタマイズをしたい社員向け</div>
+        </div>
+      </div>
+      <!-- Case 2 -->
+      <div class="case-card">
+        <div class="case-header">
+          <div class="case-icon">&#x1F3ED;</div>
+          <span class="case-badge">製造業</span>
+        </div>
+        <h3 class="case-title">技術開発部向けアプリ開発支援</h3>
+        <p class="case-overview">要件仕様に向けた技術的実現性の確認を伴走型で支援</p>
+        <div class="case-details">
+          <div class="case-detail"><span class="case-dot"></span>フロアマップ管理機能</div>
+          <div class="case-detail"><span class="case-dot"></span>Bluetooth計測器からデータ取得とピンへの表示</div>
+          <div class="case-detail"><span class="case-dot"></span>計測結果のグラフ表示</div>
+        </div>
+      </div>
+      <!-- Case 3 -->
+      <div class="case-card">
+        <div class="case-header">
+          <div class="case-icon">&#x1F3E6;</div>
+          <span class="case-badge">金融業</span>
+        </div>
+        <h3 class="case-title">プロジェクト内課題管理アプリ</h3>
+        <p class="case-overview">プロジェクト内での複数ステークホルダーに対する確認依頼事項のオーナーシップと進捗の管理をアプリで可視化</p>
+        <div class="case-details">
+          <div class="case-detail"><span class="case-dot"></span>SharePointリストとPower Appsで実現</div>
+          <div class="case-detail"><span class="case-dot"></span>定例会議での確認をアプリで実現し確認漏れの削減を実現</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cases-link">
+      <a href="cases.html">他の導入事例を確認する &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CEO MESSAGE ===== -->
+<section id="ceo" class="section bg-white">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:4rem;">
+      <p class="section-label">Message</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">代表メッセージ</h2>
+    </div>
+
+    <div class="ceo-grid">
+      <div>
+        <div class="ceo-photo">
+          <img src="images/ceo-tsuji.jpg" alt="代表取締役 辻 康博">
+        </div>
+        <div class="ceo-name-area">
+          <p class="ceo-title-label">代表取締役社長</p>
+          <p class="ceo-name">辻 康博</p>
+          <p class="ceo-name-en">Yasuhiro Tsuji</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="ceo-blockquote">
+          <p class="ceo-quote">テクノロジーで社会課題を解決する道を造る。</p>
+          <p class="ceo-quote" style="margin-top:0.5rem;">そこから交差点ができて様々なものがつながり未来が広がる。</p>
+          <p class="ceo-message">これが私たちSTRADIFYの使命です。私は、これまで多くの企業様のDX推進をご支援してきました。今まで培ってきた知見を活かし、テクノロジーの力で人材不足に苦しむ企業と社会の未来を切り拓いてまいります。</p>
+        </div>
+
+        <!-- Education + Logo -->
+        <div class="ceo-edu-logo">
+          <div class="ceo-edu-content">
+            <h3 class="ceo-heading">学歴</h3>
+            <div class="ceo-edu-list">
+              <p>福島県立安積高校</p>
+              <p>電気通信大学大学院 情報システム学研究科 工学修士</p>
+              <p>グロービス経営大学院大学 経営研究科 経営学修士（MBA）</p>
+            </div>
+          </div>
+          <div class="ceo-logo-area">
+            <img src="images/stradify-logo-vertical.png" alt="STRADIFY">
+          </div>
+        </div>
+
+        <!-- Career -->
+        <div>
+          <h3 class="ceo-heading">職歴</h3>
+          <div class="career-list">
+            <div class="career-item">
+              <span class="career-badge">3年</span>
+              <p class="career-text">日本ディジタルイクイップメント（現HP）</p>
+            </div>
+            <div class="career-item">
+              <span class="career-badge">1.5年</span>
+              <p class="career-text">クレイフィッシュ</p>
+            </div>
+            <div class="career-item">
+              <span class="career-badge">19年</span>
+              <p class="career-text">日本マイクロソフト / 大企業担当プリセールスSE、ソリューション営業マネージャー</p>
+            </div>
+            <div class="career-item">
+              <span class="career-badge">2023年2月</span>
+              <p class="career-text">STRADIFY 創業・代表取締役社長</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPANY ===== -->
+<section id="company" class="section bg-gray">
+  <div class="container" style="max-width:56rem;">
+    <div class="text-center" style="margin-bottom:3rem;">
+      <p class="section-label">Company</p>
+      <h2 class="section-title">会社概要</h2>
+    </div>
+
+    <div class="company-table">
+      <div class="company-row">
+        <span class="company-label">会社名</span>
+        <span class="company-value">株式会社STRADIFY（ストラディファイ）</span>
+      </div>
+      <div class="company-row">
+        <span class="company-label">代表取締役</span>
+        <span class="company-value">辻 康博</span>
+      </div>
+      <div class="company-row">
+        <span class="company-label">設立</span>
+        <span class="company-value">2023年2月</span>
+      </div>
+      <div class="company-row">
+        <span class="company-label">所在地</span>
+        <span class="company-value">〒150-0002 東京都渋谷区渋谷二丁目19番15号 宮益坂ビルディング609</span>
+      </div>
+      <div class="company-row">
+        <span class="company-label">所属</span>
+        <span class="company-value">10名（業務委託含む）</span>
+      </div>
+      <div class="company-row">
+        <span class="company-label">ウェブ</span>
+        <span class="company-value"><a href="https://stradify.jp" target="_blank" rel="noopener noreferrer">https://stradify.jp</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT CTA ===== -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <h2 class="contact-title">お問い合わせ・ご相談</h2>
+    <p class="contact-desc">
+      DX推進やシステム導入に関するご相談は、お気軽にお問い合わせください。<br>
+      貴社の課題に合わせた最適なソリューションをご提案いたします。
+    </p>
+    <a href="https://forms.office.com/pages/responsepage.aspx?id=BzXlWtj0XkKFqyAkWPw65NM9vgNh_D9FuIdz6WykPJ9UN085NjdNNjhQVlpMOFBIRFlSUlU2S09LMS4u&route=shorturl" target="_blank" rel="noopener noreferrer" class="contact-btn">
+      お問い合わせフォームへ
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <img src="images/stradify-logo-vertical.png" alt="STRADIFY" class="footer-logo">
+      </div>
+      <div class="footer-right">
+        <nav class="sitemap-grid">
+          <p class="sitemap-title">サイトマップ</p>
+          <a href="#vision" class="sitemap-link">ビジョン</a>
+          <a href="#services" class="sitemap-link">サービス</a>
+          <a href="#cases" class="sitemap-link">事例</a>
+          <a href="#ceo" class="sitemap-link">代表メッセージ</a>
+          <a href="#company" class="sitemap-link">会社概要</a>
+        </nav>
+        <div>
+          <p class="footer-company-name">株式会社STRADIFY</p>
+          <p class="footer-address">
+            〒150-0002 東京都渋谷区渋谷二丁目19番15号<br>
+            宮益坂ビルディング609
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2023 STRADIFY Inc. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile() {
+  var nav = document.getElementById('mobile-nav');
+  var menuIcon = document.getElementById('menu-icon');
+  var closeIcon = document.getElementById('close-icon');
+  var isOpen = nav.classList.contains('open');
+  if (isOpen) {
+    nav.classList.remove('open');
+    menuIcon.style.display = '';
+    closeIcon.style.display = 'none';
+  } else {
+    nav.classList.add('open');
+    menuIcon.style.display = 'none';
+    closeIcon.style.display = '';
+  }
+}
+function closeMobile() {
+  var nav = document.getElementById('mobile-nav');
+  var menuIcon = document.getElementById('menu-icon');
+  var closeIcon = document.getElementById('close-icon');
+  nav.classList.remove('open');
+  menuIcon.style.display = '';
+  closeIcon.style.display = 'none';
+}
+</script>
+
+</body>
+</html>
